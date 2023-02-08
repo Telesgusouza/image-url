@@ -1,12 +1,18 @@
 import imgUpload from "../../assets/image.svg";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import React, {
+  ChangeEvent,
+  HTMLInputTypeAttribute,
+  InputHTMLAttributes,
+  useEffect,
+  useState,
+} from "react";
 
 import * as Styled from "./style";
 import useActionTypes from "../../redux/upload/useActionTypes";
 
 export default function UploadImage() {
-  const [inputFIle, setInputFIle] = useState<any>(null);
+  const [inputFIle, setInputFIle] = useState<null | File>(null);
 
   const dispatch = useDispatch();
 
@@ -21,6 +27,12 @@ export default function UploadImage() {
     }
   }, [inputFIle]);
 
+  function handleInputFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const { files }: any = e.target; // HTMLInputElement ???
+
+    setInputFIle(files[0]);
+  }
+
   return (
     <Styled.Container className="box">
       <h1>Suba sua imagem</h1>
@@ -33,7 +45,9 @@ export default function UploadImage() {
             {inputFIle ? inputFIle.name : "Arraste e solte sua imagem aqui"}
           </p>
           <input
-            onChange={(e: any) => setInputFIle(e.target.files[0])}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              handleInputFile(e)
+            }
             type="file"
             name="file"
           />

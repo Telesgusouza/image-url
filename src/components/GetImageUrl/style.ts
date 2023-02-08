@@ -10,6 +10,10 @@ export const Container = styled.main`
     width: 100%;
     max-width: 300px;
   }
+
+  @media (max-width: 380px) {
+    width: 90vw;
+  }
 `;
 
 export const ButtonComeBack = styled.button`
@@ -17,7 +21,7 @@ export const ButtonComeBack = styled.button`
   background-color: #ff6961;
   color: white;
   padding: 3px 10px;
-  font-size: .65rem;
+  font-size: 0.65rem;
   border-radius: 2px;
   margin-bottom: 10px;
 

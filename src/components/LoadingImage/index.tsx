@@ -8,27 +8,32 @@ import { storage } from "../../Data/firebase";
 import * as Style from "./style";
 import useActionTypes from "../../redux/upload/useActionTypes";
 
+type PropReducer = {
+  uploadState: () => {};
+};
+
 export default function LoadingImage() {
   const [progressBar, setProgressBar] = useState(0);
-  const { uploadImage, getImageUrl } = useSelector((reducer: any) => reducer.uploadState);
+  const { uploadImage }:any = useSelector(
+    (reducer: PropReducer) => reducer.uploadState
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
     const randomId = createId();
-    const imageRef = ref(storage, `image/${uploadImage.name}-${randomId}`);
+    const imageRef = ref(storage, `image/${randomId}_${uploadImage.name}`);
 
     const uploadTask = uploadBytesResumable(imageRef, uploadImage);
 
     uploadTask.on(
       "state_changed",
-      (snapshot: any) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setProgressBar(progress);
       },
       (error) => {
         console.error(error);
-        alert("ocorreu um erro por favor envia sua mensagem");
+        alert("ocorreu um erro, por favor envie apenas fotos com no maximo de 3MB");
         dispatch({
           type: useActionTypes.UPLOAD,
         });

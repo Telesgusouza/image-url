@@ -8,7 +8,7 @@ import useActionTypes from "../redux/upload/useActionTypes";
 
 function App() {
 
-  const { momentstate, uploadImage } = useSelector((reducer:any) => reducer.uploadState);
+  const { momentstate } = useSelector((reducer:any) => reducer.uploadState);
 
   return (
     <div className="App">

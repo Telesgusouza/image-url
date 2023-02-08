@@ -12,21 +12,28 @@ export const Container = styled.main`
     font-size: 11px;
     margin: 15px 0;
   }
+
+  @media (max-width: 340px) {
+    width: 100%;
+  }
 `;
 
 export const Form = styled.form`
-
   div {
     width: 250px;
     padding: 20px;
 
     background-color: #f6f8fb;
     height: 200px;
-    border: 2px dashed #97BEF4;
+    border: 2px dashed #97bef4;
 
     position: relative;
 
     border-radius: 12px;
+
+    @media (max-width: 340px) {
+      width: 100%;
+    }
   }
 
   img {
@@ -46,7 +53,7 @@ export const Form = styled.form`
   }
 
   button {
-    background-color: #2F80ED;
+    background-color: #2f80ed;
     border: none;
     padding: 6px 18px;
     color: white;
